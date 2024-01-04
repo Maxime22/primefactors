@@ -5,10 +5,10 @@ use PHPUnit\Framework\TestCase;
 
 class PrimeFactorsTest extends TestCase
 {
-    /** @test * */
+    /** @test */
     public function it_should_throw_an_exception_when_input_is_not_an_integer(): void
     {
-        $this->expectException(\Exception::class);
+        $this->expectException(Exception::class);
 
         // GIVEN
         $stringInput = "a";
@@ -18,10 +18,10 @@ class PrimeFactorsTest extends TestCase
         $primeFactorService->calculatePrimeFactors($stringInput);
     }
 
-    /** @test * */
+    /** @test */
     public function it_should_throw_an_exception_when_input_is_null(): void
     {
-        $this->expectException(\Exception::class);
+        $this->expectException(Exception::class);
 
         // GIVEN
         $nullInput = null;
@@ -31,10 +31,10 @@ class PrimeFactorsTest extends TestCase
         $primeFactorService->calculatePrimeFactors($nullInput);
     }
 
-    /** @test * */
+    /** @test */
     public function it_should_throw_an_exception_when_input_is_an_integer_negative(): void
     {
-        $this->expectException(\Exception::class);
+        $this->expectException(Exception::class);
 
         // GIVEN
         $negativeInput = -1;
@@ -44,10 +44,10 @@ class PrimeFactorsTest extends TestCase
         $primeFactorService->calculatePrimeFactors($negativeInput);
     }
 
-    /** @test * */
+    /** @test */
     public function it_should_throw_an_exception_when_input_is_an_integer_equals_to_zero(): void
     {
-        $this->expectException(\Exception::class);
+        $this->expectException(Exception::class);
 
         // GIVEN
         $zeroInput = 0;
@@ -57,10 +57,10 @@ class PrimeFactorsTest extends TestCase
         $primeFactorService->calculatePrimeFactors($zeroInput);
     }
 
-    /** @test * */
+    /** @test */
     public function it_should_throw_an_exception_with_a_feedback_message_when_input_is_not_valid(): void
     {
-        $this->expectException(\Exception::class);
+        $this->expectException(Exception::class);
         $this->expectExceptionMessage(PrimeFactorService::INVALID_INPUT_FORMAT_MESSAGE);
 
         // GIVEN
@@ -71,7 +71,7 @@ class PrimeFactorsTest extends TestCase
         $primeFactorService->calculatePrimeFactors($invalidInput);
     }
 
-    /** @test * */
+    /** @test */
     public function it_should_return_an_array_when_input_is_valid(): void
     {
         // GIVEN
@@ -85,7 +85,7 @@ class PrimeFactorsTest extends TestCase
         $this->assertIsArray($result);
     }
 
-    /** @test * */
+    /** @test */
     public function it_should_return_an_empty_array_when_input_is_1(): void
     {
         // GIVEN
@@ -127,10 +127,9 @@ class PrimeFactorsTest extends TestCase
         ];
     }
 
-    /**
-     * @test
-     */
-    public function it_should_not_return_only_the_prime_number_if_the_input_is_not_a_prime_number_and_is_more_than_one(): void
+    /** @test */
+    public function it_should_not_return_only_the_prime_number_if_the_input_is_not_a_prime_number_and_is_more_than_one(
+    ): void
     {
         // GIVEN
         $inputNotPrimeNumber = 4;
@@ -147,8 +146,10 @@ class PrimeFactorsTest extends TestCase
      * @test
      * @dataProvider notPrimeNumberProvider
      */
-    public function it_should_return_prime_factors_if_the_input_is_not_a_prime_number($inputNotPrimeNumber, $expectedResult): void
-    {
+    public function it_should_return_prime_factors_if_the_input_is_not_a_prime_number(
+        $inputNotPrimeNumber,
+        $expectedResult
+    ): void {
         // GIVEN
         $primeFactorService = new PrimeFactorService();
 
@@ -164,7 +165,39 @@ class PrimeFactorsTest extends TestCase
         return [
             [
                 'input' => 6,
-                'expectedResult' => [2,3]
+                'expectedResult' => [2, 3]
+            ],
+            [
+                'input' => 8,
+                'expectedResult' => [2, 2, 2]
+            ],
+            [
+                'input' => 9,
+                'expectedResult' => [3, 3]
+            ],
+            [
+                'input' => 18,
+                'expectedResult' => [2, 3, 3]
+            ],
+            [
+                'input' => 25,
+                'expectedResult' => [5, 5]
+            ],
+            [
+                'input' => 64,
+                'expectedResult' => [2, 2, 2, 2, 2, 2]
+            ],
+            [
+                'input' => 74,
+                'expectedResult' => [2, 37]
+            ],
+            [
+                'input' => 786,
+                'expectedResult' => [2, 3, 131]
+            ],
+            [
+                'input' => 1000,
+                'expectedResult' => [2, 2, 2, 5, 5, 5]
             ],
         ];
     }

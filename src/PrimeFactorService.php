@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App;
@@ -21,16 +22,39 @@ class PrimeFactorService
         if ($this->isPrimeNumber($input)) {
             return [$input];
         }
-        return [];
+
+        $result = [];
+        $currentNumberValue = $input;
+        $currentDivisor = 2;
+        while ($currentDivisor <= $currentNumberValue) {
+            $isPrimeAndDivisible = $this->isPrimeNumber($currentDivisor) && $this->isDivisibleBy(
+                    $currentNumberValue,
+                    $currentDivisor
+                );
+
+            if ($isPrimeAndDivisible) {
+                $result[] = $currentDivisor;
+                $currentNumberValue = $currentNumberValue / $currentDivisor;
+            } else {
+                $currentDivisor++;
+            }
+        }
+
+        return $result;
     }
 
-    private function isPrimeNumber(int $input): bool
+    private function isPrimeNumber(int $number): bool
     {
-        for ($i = 2; $i < $input; $i++) {
-            if ($input % $i === 0) {
+        for ($i = 2; $i < $number; $i++) {
+            if ($this->isDivisibleBy($number, $i)) {
                 return false;
             }
         }
         return true;
+    }
+
+    private function isDivisibleBy(int $dividend, int $divisor): bool
+    {
+        return $dividend % $divisor === 0;
     }
 }
