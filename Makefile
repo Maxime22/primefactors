@@ -8,5 +8,5 @@ sh:
 	docker exec -it containerprimefactors sh
 
 test:
-	docker exec containerfractions sh -c "php -d memory_limit=512M ./vendor/bin/phpunit"
+	docker exec containerprimefactors sh -c "php -d memory_limit=512M ./vendor/bin/phpunit"
 
