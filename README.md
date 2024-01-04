@@ -22,6 +22,7 @@ Dans le kata **Prime Factors**, vous allez écrire une routine qui prend un argu
 - `make build`
 - `make start`
 - `make sh` + `composer install` dans le container (puis exit)
+- Si vos classes ne sont pas reconnues dans les tests, aller dans le container et faire `composer dump-autoload`
 
 ## Tests
 - `make test`
